@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Колледж НИУ РАНХиГС | История непрерывного образования</title>
+    <!-- Google Fonts + Font Awesome (общие) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ========== БАЗОВЫЕ СБРОСЫ (общие) ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background: #faf7f2; overflow-x: hidden; color: #2c241a; transition: background 0.2s; }
+        :root {
+            --ranepa-burgundy: #9b2e2e;
+            --ranepa-burgundy-dark: #771f1f;
+            --ranepa-gold: #b68b40;
+            --light-cream: #fef7ed;
+            --light-card: #ffffff;
+            --card-shadow: 0 12px 28px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(155, 46, 46, 0.1);
+            --border-light: #e9dfd1;
+        }
+        html { scroll-behavior: smooth; }
+        
+        /* КНОПКА ПЕРЕКЛЮЧЕНИЯ ДИЗАЙНА (всегда видима) */
+        .design-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: var(--ranepa-burgundy);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .design-toggle-btn i { font-size: 1.1rem; }
+        .design-toggle-btn:hover {
+            background: var(--ranepa-gold);
+            transform: scale(1.02);
+            color: #2c241a;
+        }
+        
+        /* ========== ВЕРСИЯ 1 (ИСХОДНЫЙ ДИЗАЙН) ========== */
+        .version-1 {
+            display: block;
+        }
+        .version-1 .timeline-slider-container {
+            position: sticky; top: 20px; z-index: 1000; display: flex; justify-content: center; margin: 20px 0 10px; pointer-events: none;
+            animation: slideDown 0.6s ease-out;
+        }
+        .version-1 .slider-card {
+            background: rgba(255, 252, 245, 0.96); backdrop-filter: blur(14px); border-radius: 56px; padding: 0.7rem 2rem;
+            display: flex; gap: 1.8rem; align-items: center; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--ranepa-burgundy);
+            pointer-events: auto; border: 1px solid rgba(155, 46, 46, 0.3);
+        }
+        .version-1 .slider-card:hover { transform: scale(1.01); border-color: var(--ranepa-gold); }
+        .version-1 .slider-label { font-weight: 600; letter-spacing: 1px; font-size: 0.85rem; color: #3e2c1c; text-transform: uppercase; }
+        .version-1 .era-badge { background: var(--ranepa-burgundy); padding: 0.3rem 1rem; border-radius: 40px; font-size: 0.8rem; font-weight: 600; color: white; }
+        .version-1 input[type="range"] { width: 320px; height: 4px; -webkit-appearance: none; background: linear-gradient(90deg, var(--ranepa-burgundy-dark), var(--ranepa-gold)); border-radius: 5px; cursor: pointer; }
+        .version-1 input[type="range"]::-webkit-slider-thumb { width: 20px; height: 20px; background: white; border-radius: 50%; border: 2px solid var(--ranepa-burgundy); cursor: pointer; }
+        .version-1 .era-value { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.25rem; min-width: 110px; color: #2c241a; }
+        .version-1 .hero-dynamic { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; transition: background-image 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1); background-size: cover; background-position: center 30%; background-attachment: fixed; }
+        .version-1 .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(250, 247, 242, 0.78); backdrop-filter: brightness(1.02) blur(1px); z-index: 1; }
+        .version-1 .hero-content { position: relative; z-index: 2; max-width: 900px; padding: 2rem; animation: fadeInUp 1s ease-out; background: rgba(255, 252, 245, 0.7); backdrop-filter: blur(8px); border-radius: 48px; margin: 1.5rem; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        .version-1 .academic-badge { background: rgba(155, 46, 46, 0.85); display: inline-block; padding: 0.4rem 1.2rem; border-radius: 40px; margin-bottom: 1rem; font-weight: 500; font-size: 0.85rem; color: white; }
+        .version-1 .hero-content h1 { font-family: 'Cormorant Garamond', serif; font-size: 3.8rem; font-weight: 700; margin-bottom: 1rem; color: #3a2a1c; }
+        .version-1 .hero-era-text { font-size: 1.6rem; font-style: italic; border-top: 2px solid var(--ranepa-burgundy); display: inline-block; padding-top: 0.8rem; margin-bottom: 1.5rem; color: #5c3e2a; font-weight: 500; }
+        .version-1 .category-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 2rem auto; max-width: 1100px; padding: 0 1.5rem; }
+        .version-1 .cat-btn { background: #ffffffea; backdrop-filter: blur(4px); border: 1px solid var(--ranepa-burgundy); padding: 0.7rem 1.8rem; border-radius: 44px; font-weight: 600; color: #4a3520; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 10px; }
+        .version-1 .cat-btn.active, .version-1 .cat-btn:hover { background: var(--ranepa-burgundy); color: white; border-color: var(--ranepa-gold); transform: translateY(-2px); }
+        .version-1 .info-panel { max-width: 1150px; margin: 2rem auto 4rem; padding: 2rem; background: var(--light-card); border-radius: 32px; border: 1px solid var(--border-light); box-shadow: var(--card-shadow); }
+        .version-1 .info-header { display: flex; align-items: center; gap: 14px; border-bottom: 2px solid var(--ranepa-burgundy); padding-bottom: 0.8rem; margin-bottom: 1.8rem; }
+        .version-1 .info-header i { font-size: 2.2rem; color: var(--ranepa-burgundy); }
+        .version-1 .info-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; color: #2e241b; }
+        .version-1 .info-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+        .version-1 .info-card { background: #fefaf4; border-radius: 24px; padding: 1.3rem 1.8rem; transition: all 0.35s ease; border-left: 4px solid var(--ranepa-burgundy); opacity: 0; transform: translateX(-8px); animation: cardSlide 0.45s forwards; }
+        @keyframes cardSlide { to { opacity: 1; transform: translateX(0); } }
+        .version-1 .info-card:hover { transform: translateX(5px) translateY(-3px); background: #fff7ed; border-left-width: 6px; border-left-color: var(--ranepa-gold); }
+        .version-1 .gallery-mini { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
+        .version-1 .mini-img { width: 130px; height: 95px; background-size: cover; background-position: center; border-radius: 18px; border: 1px solid var(--ranepa-burgundy); cursor: pointer; background-color: #e9dfd1; }
+        .version-1 footer { background: #f3ede5; padding: 2rem; text-align: center; border-top: 1px solid var(--ranepa-burgundy); font-size: 0.85rem; color: #5c4a38; }
+        .version-1 .scroll-top { position: fixed; bottom: 30px; right: 30px; background: var(--ranepa-burgundy); width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: all 0.3s; z-index: 99; color: white; }
+        .modal-img { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(5px); }
+        .modal-img.active { display: flex; }
+        .modal-img img { max-width: 85vw; max-height: 85vh; border: 3px solid var(--ranepa-gold); border-radius: 24px; }
+        
+        /* ========== ВЕРСИЯ 2 (ДИЗАЙН "ИСТОРИЯ КОЛЛЕДЖА") ========== */
+        .version-2 {
+            display: none;
+            font-family: 'Lato', sans-serif;
+            background: #fbfaf8;
+            color: #1e1a16;
+        }
+        /* все стили второго дизайна — инкапсулированы внутри .version-2 */
+        .version-2 .main-wrapper { display: flex; flex-direction: row; width: 100%; padding-right: 140px; }
+        .version-2 .content-area { flex: 1; min-width: 0; padding: 0 2rem; }
+        .version-2 .timeline-vertical { position: fixed; top: 50%; right: 32px; transform: translateY(-50%); z-index: 200; background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(18px); border-radius: 60px; padding: 1.5rem 0.8rem; box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(194, 126, 46, 0.3); border: 1px solid rgba(139, 44, 45, 0.2); }
+        .version-2 .vertical-slider-container { display: flex; flex-direction: column; align-items: center; gap: 0; }
+        .version-2 .vertical-slider { position: relative; width: 16px; height: 300px; background: linear-gradient(180deg, #8b2c2d, #c27e2e, #8b2c2d); border-radius: 10px; margin: 0.5rem 0; }
+        .version-2 input[type="range"].vertical-range { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-appearance: slider-vertical; appearance: slider-vertical; background: transparent; margin: 0; cursor: pointer; z-index: 15; }
+        .version-2 input[type="range"].vertical-range::-webkit-slider-thumb { -webkit-appearance: none; width: 30px; height: 30px; background: white; border-radius: 50%; border: 2px solid #c27e2e; cursor: pointer; margin-top: -14px; }
+        .version-2 .vertical-markers-wrapper { position: absolute; left: -28px; top: 0; height: 100%; width: 100px; pointer-events: none; z-index: 10; }
+        .version-2 .marker-vertical { position: absolute; transform: translateY(-50%); left: 0; width: 24px; height: 24px; cursor: pointer; pointer-events: auto; z-index: 25; }
+        .version-2 .hero-dynamic { position: relative; min-height: 68vh; display: flex; align-items: center; justify-content: center; text-align: center; transition: background-image 0.5s ease; background-size: cover; background-position: center 30%; background-attachment: fixed; border-radius: 0 0 48px 48px; margin-bottom: 1.5rem; }
+        .version-2 .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #fbfaf8; backdrop-filter: brightness(1.02); border-radius: 0 0 48px 48px; }
+        .version-2 .hero-content { position: relative; z-index: 2; max-width: 920px; padding: 2.2rem; animation: fadeUp 0.8s ease-out; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        .version-2 .academic-badge { background: rgba(139, 44, 45, 0.9); display: inline-block; padding: 0.5rem 1.8rem; border-radius: 60px; margin-bottom: 1.4rem; font-weight: 600; font-size: 0.9rem; color: white; backdrop-filter: blur(4px); }
+        .version-2 .hero-content h1 { font-weight: 800; font-size: 3.8rem; margin-bottom: 1.2rem; color: #2b221c; line-height: 1.2; }
+        .version-2 .hero-era-text { font-size: 1.4rem; font-weight: 600; border-left: 4px solid #c27e2e; padding-left: 1.3rem; display: inline-block; background: rgba(255, 255, 245, 0.7); backdrop-filter: blur(4px); border-radius: 60px; padding: 0.6rem 1.8rem; color: #543e28; }
+        .version-2 .category-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 2rem auto 2rem; max-width: 1200px; padding: 0 1rem; }
+        .version-2 .tab-btn { background: #ffffff; border: none; padding: 0.8rem 2rem; border-radius: 52px; font-weight: 700; color: #3b2c1f; cursor: pointer; transition: all 0.4s ease; font-size: 1rem; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); border: 1px solid #ece2d8; }
+        .version-2 .tab-btn i { font-size: 1.1rem; color: #8b2c2d; }
+        .version-2 .tab-btn.active, .version-2 .tab-btn:hover { background: #8b2c2d; color: white; border-color: #c27e2e; transform: translateY(-2px); box-shadow: 0 12px 22px rgba(139,44,45,0.2); }
+        .version-2 .tab-btn.active i, .version-2 .tab-btn:hover i { color: white; }
+        .version-2 .info-panel { max-width: 1300px; margin: 0 auto 2rem; padding: 0 1rem; }
+        .version-2 .panel-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 2.2rem; flex-wrap: wrap; justify-content: space-between; border-bottom: 2px solid #e9c68d; padding-bottom: 0.8rem; }
+        .version-2 .panel-header-left { display: flex; align-items: center; gap: 16px; }
+        .version-2 .panel-header-left i { font-size: 2.2rem; color: #8b2c2d; background: rgba(139,44,45,0.1); padding: 12px; border-radius: 28px; }
+        .version-2 .panel-header-left h2 { font-weight: 800; font-size: 2rem; color: #271f19; margin: 0; }
+        .version-2 .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2.2rem; transition: opacity 0.3s ease; }
+        .version-2 .history-card { background: white; border-radius: 32px; padding: 1.8rem; transition: all 0.4s; border: 1px solid #eee3d8; cursor: pointer; box-shadow: 0 6px 14px rgba(0,0,0,0.05); display: flex; flex-direction: column; height: 100%; }
+        .version-2 .history-card:hover { transform: translateY(-6px); border-color: #c27e2e; box-shadow: 0 25px 45px -12px rgba(0,0,0,0.15); }
+        .version-2 .history-card h3 { font-size: 1.5rem; margin-bottom: 0.8rem; color: #8b2c2d; font-weight: 800; display: flex; align-items: center; gap: 12px; }
+        .version-2 .history-card p { line-height: 1.5; color: #4f3e2e; font-size: 1rem; flex: 1; margin-bottom: 1.2rem; }
+        .version-2 .card-image-wrapper { width: 100%; aspect-ratio: 4/3; border-radius: 24px; overflow: hidden; background: #f2ece4; margin-top: 12px; transition: all 0.3s; }
+        .version-2 .card-image-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .version-2 .history-card:hover .card-image-wrapper img { transform: scale(1.03); }
+        .version-2 .detail-modal, .version-2 .image-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 2000; }
+        .version-2 .detail-modal.active, .version-2 .image-modal.active { display: flex; animation: fadeModal 0.25s ease; }
+        @keyframes fadeModal { from { opacity: 0; } to { opacity: 1; } }
+        .version-2 .detail-content { background: white; max-width: 580px; width: 90%; border-radius: 36px; padding: 32px; border-top: 6px solid #c27e2e; position: relative; box-shadow: 0 30px 40px rgba(0,0,0,0.2); }
+        .version-2 .close-detail { position: absolute; right: 24px; top: 22px; font-size: 32px; cursor: pointer; color: #eaceb1; }
+        .version-2 .close-detail:hover { color: #8b2c2d; }
+        .version-2 .detail-content h3 { font-size: 2rem; font-weight: 800; color: #8b2c2d; margin-bottom: 16px; }
+        .version-2 .image-modal img { max-width: 85vw; max-height: 85vh; border-radius: 32px; border: 3px solid white; box-shadow: 0 20px 35px rgba(0,0,0,0.3); }
+        .version-2 footer { background: #fbfaf8; padding: 2.2rem 1.8rem; text-align: center; border-top: 1px solid #e2d5ca; margin-top: 2.5rem; }
+        .version-2 .footer-logo { font-weight: 800; font-size: 1.8rem; color: #8b2c2d; }
+        .version-2 .scroll-top { position: fixed; bottom: 30px; left: 30px; background: #8b2c2d; width: 52px; height: 52px; border-radius: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: 0.3s; z-index: 99; color: white; }
+        @media (max-width: 900px) { .version-2 .main-wrapper { padding-right: 120px; } .version-2 .timeline-vertical { right: 12px; } .version-2 .vertical-slider { height: 260px; } .version-2 .hero-content h1 { font-size: 2.2rem; } }
+        @media (max-width: 650px) { .version-2 .main-wrapper { padding-right: 0; } .version-2 .timeline-vertical { position: relative; top: auto; right: auto; transform: none; margin: 1rem auto; width: 90%; border-radius: 40px; } .version-2 .vertical-slider { width: 100%; height: 40px; background: linear-gradient(90deg, #8b2c2d, #c27e2e); } .version-2 input[type="range"].vertical-range { -webkit-appearance: slider-horizontal; appearance: slider-horizontal; } .version-2 .vertical-markers-wrapper { display: none; } }
+        
+        /* общий для модалок и скролла */
+        .scroll-top { position: fixed; bottom: 30px; right: 30px; background: var(--ranepa-burgundy); width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: all 0.3s; z-index: 99; color: white; }
+        .modal-img, .version-2 .image-modal, .version-2 .detail-modal { display: none; }
+        .active { display: flex !important; }
+    </style>
+</head>
+<body>
+    <button class="design-toggle-btn" id="toggleDesignBtn"><i class="fas fa-layer-group"></i> Сменить дизайн</button>
+    
+    <!-- ==================== ВЕРСИЯ 1 (Оригинальный дизайн) ==================== -->
+    <div class="version-1" id="version1Container">
+        <div class="timeline-slider-container">
+            <div class="slider-card">
+                <span class="slider-label"><i class="fas fa-timeline"></i> ИСТОРИЧЕСКИЙ ПУТЬ</span>
+                <input type="range" id="eraSlider1" min="0" max="100" value="20">
+                <span class="era-value" id="eraLabel1">1992–2002</span>
+                <div class="era-badge" id="eraChip1">СТАНОВЛЕНИЕ</div>
+            </div>
+        </div>
+        <section class="hero-dynamic" id="heroDynamic1">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="academic-badge"><i class="fas fa-university"></i> НИУ РАНХиГС · Колледж непрерывного образования</div>
+                <h1>Колледж НИУ РАНХиГС<br><span style="font-size: 2rem; font-weight: 400;">От подготовительных курсов до флагмана СПО</span></h1>
+                <div class="hero-era-text" id="heroEraText1">1992–2002: создание системы «школа – вуз»</div>
+                <p style="margin-top: 1.2rem;">Используйте ползунок, чтобы увидеть трансформацию колледжа</p>
+            </div>
+        </section>
+        <div class="category-nav" id="categoryNav1">
+            <div class="cat-btn active" data-cat="college"><i class="fas fa-landmark"></i> Колледж</div>
+            <div class="cat-btn" data-cat="teachers"><i class="fas fa-chalkboard-user"></i> Преподаватели</div>
+            <div class="cat-btn" data-cat="leadership"><i class="fas fa-user-tie"></i> Руководство</div>
+            <div class="cat-btn" data-cat="graduates"><i class="fas fa-graduation-cap"></i> Выпускники</div>
+            <div class="cat-btn" data-cat="achievements"><i class="fas fa-trophy"></i> Достижения</div>
+        </div>
+        <div class="info-panel">
+            <div class="info-header"><i id="headerIcon1" class="fas fa-landmark"></i><h2 id="headerTitle1">Колледж: от истоков к лидерству</h2></div>
+            <div id="dynamicContent1" class="info-grid"></div>
+        </div>
+        <footer><div style="font-family: 'Cormorant Garamond'; font-size: 1.6rem; color: var(--ranepa-burgundy);">Колледж НИУ РАНХиГС</div><p>Нижний Новгород, проспект Гагарина, 46 | История среднего профессионального образования в Президентской академии</p></footer>
+        <div class="scroll-top" id="scrollTop1"><i class="fas fa-chevron-up"></i></div>
+        <div class="modal-img" id="imageModal1"><span id="closeModal1" style="position:absolute; top:20px; right:35px; font-size:2.2rem; color:white; cursor:pointer;">&times;</span><img id="modalImgSrc1" src="" alt=""></div>
+    </div>
+
+    <!-- ==================== ВЕРСИЯ 2 (ДИЗАЙН "ИСТОРИЯ КОЛЛЕДЖА") ==================== -->
+    <div class="version-2" id="version2Container">
+        <div class="main-wrapper">
+            <div class="content-area">
+                <section class="hero-dynamic" id="heroDynamic2">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <div class="academic-badge"><i class="fas fa-university"></i> Колледж НИУ РАНХиГС | Президентская академия</div>
+                        <h1>Колледж НИУ — филиала РАНХиГС<br><span style="font-size: 1.8rem; font-weight: 500;">Нижний Новгород</span></h1>
+                        <div class="hero-era-text" id="heroEraText2">1992–2003: Зарождение непрерывного образования</div>
+                    </div>
+                </section>
+                <div class="category-tabs" id="categoryTabs2">
+                    <div class="tab-btn active" data-cat="college"><i class="fas fa-graduation-cap"></i> Колледж</div>
+                    <div class="tab-btn" data-cat="teachers"><i class="fas fa-chalkboard-user"></i> Преподаватели</div>
+                    <div class="tab-btn" data-cat="leadership"><i class="fas fa-user-tie"></i> Руководство</div>
+                    <div class="tab-btn" data-cat="graduates"><i class="fas fa-star-of-life"></i> Выпускники</div>
+                    <div class="tab-btn" data-cat="achievements"><i class="fas fa-trophy"></i> Достижения</div>
+                </div>
+                <div class="info-panel">
+                    <div class="panel-header">
+                        <div class="panel-header-left"><i id="panelIcon2" class="fas fa-graduation-cap"></i><h2 id="panelTitle2">Колледж: путь к лидерству</h2></div>
+                    </div>
+                    <div class="cards-stage"><div id="dynamicContent2" class="cards-grid"></div></div>
+                </div>
+                <footer><div class="footer-logo"><i class="fas fa-landmark"></i> Колледж НИУ РАНХиГС</div><div>Нижний Новгород, проспект Гагарина, 46 | Приемная комиссия: +7 (831) 433-02-22</div></footer>
+            </div>
+            <div class="timeline-vertical">
+                <div class="vertical-slider-container">
+                    <div class="vertical-slider" style="position: relative;">
+                        <input type="range" id="eraSliderVertical2" class="vertical-range" min="0" max="100" value="0" step="1" orient="vertical">
+                        <div class="vertical-markers-wrapper">
+                            <div class="marker-vertical" data-era-val="0" style="top: 0%;"></div>
+                            <div class="marker-vertical" data-era-val="50" style="top: 50%;"></div>
+                            <div class="marker-vertical" data-era-val="100" style="top: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-top" id="scrollTop2"><i class="fas fa-arrow-up"></i></div>
+        <div id="detailModal2" class="detail-modal"><div class="detail-content"><span class="close-detail">&times;</span><h3 id="detailTitle2"></h3><p id="detailDesc2"></p><div id="detailExtra2"></div></div></div>
+        <div id="imageModal2" class="image-modal"><span style="position:absolute; top:20px; right:35px; font-size:44px; color:white; cursor:pointer;" class="closeImageModal2">&times;</span><img id="modalImage2" src="" alt=""></div>
+    </div>
+
+    <script>
+        // ============================================================
+        // 1) ВЕРСИЯ 1 (оригинальный контент, полная логика)
+        // ============================================================
+        (function() {
+            const eras = [
+                { min: 0, max: 33, name: "1992–2002", chip: "СТАНОВЛЕНИЕ", heroText: "1992–2002: подготовительные курсы, лицейские классы, Центр довузовской подготовки", bg: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1600&auto=format" },
+                { min: 34, max: 66, name: "2003–2021", chip: "ФАКУЛЬТЕТ СПО", heroText: "2003–2021: факультет среднего профессионального образования и довузовской подготовки", bg: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&auto=format" },
+                { min: 67, max: 100, name: "2022–2026", chip: "КОЛЛЕДЖ", heroText: "2022–2026: Колледж НИУ РАНХиГС — центр инноваций и традиций", bg: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1600&auto=format" }
+            ];
+            function getEraByValue(val) { if (val <= 33) return eras[0]; if (val <= 66) return eras[1]; return eras[2]; }
+            const contentDB = {
+                college: { "1992–2002": { title: "Колледж: становление довузовской подготовки", items: [{ title:"Подготовительные курсы (1992)", desc:"Первые шаги: в 1992 году организованы подготовительные курсы." },{ title:"Лицейские классы (1993)", desc:"Открыты профильные классы на базе школ." },{ title:"Центр довузовской подготовки (1995)", desc:"Образован ЦДП, объединивший все формы." }], extra:"" }, "2003–2021":{ title:"Факультет СПО (2003–2021)", items:[{ title:"Создание факультета (2003)", desc:"Преобразован в факультет СПО. Декан В.Р. Дряхлова." },{ title:"Развитие программ СПО", desc:"ГМУ, Финансы, Менеджмент." },{ title:"Непрерывное образование", desc:"Интегрированные планы, 80% поступления в вуз." }] }, "2022–2026":{ title:"Колледж НИУ РАНХиГС", items:[{ title:"Преобразование в колледж (2022)", desc:"С 1 сентября 2022 года колледж. Директор С.В. Иванов." },{ title:"Современная среда", desc:"Цифровые лаборатории, чемпионаты." }] } },
+                teachers: { "1992–2002":{ title:"Педагоги-первопроходцы", items:[{ title:"Гусева М.А.", desc:"Инициатор системы 'школа-вуз'." },{ title:"Логинова Т.М.", desc:"Первый руководитель УМО." }] }, "2003–2021":{ title:"Золотой фонд", items:[{ title:"Дряхлова В.Р.", desc:"Многолетний декан." },{ title:"Соколова С.В.", desc:"Руководитель УМО." }] }, "2022–2026":{ title:"Современная команда", items:[{ title:"Иванов С.В.", desc:"Директор колледжа." },{ title:"Григорьева Е.В.", desc:"Заместитель директора." }] } },
+                leadership: { "1992–2002":{ title:"Руководство: создание системы", items:[{ title:"Мальцев В.А.", desc:"Директор института." },{ title:"Марченков П.А.", desc:"Первый проректор." }] }, "2003–2021":{ title:"Руководство факультета", items:[{ title:"Дряхлова В.Р.", desc:"Декан факультета СПО." }] }, "2022–2026":{ title:"Современное руководство", items:[{ title:"Иванов С.В.", desc:"Директор колледжа." },{ title:"Лебедева Е.А.", desc:"Директор института." }] } },
+                graduates: { "1992–2002":{ title:"Первые выпускники", items:[{ title:"Выпускники курсов", desc:"Успешно поступали в вуз." }] }, "2003–2021":{ title:"Выпускники факультета СПО", items:[{ title:"Кадры для госслужбы", desc:"Работают в администрациях." }] }, "2022–2026":{ title:"Выпускники XXI века", items:[{ title:"Востребованность", desc:"94% трудоустройства." }] } },
+                achievements: { "1992–2002":{ title:"Достижения начального этапа", items:[{ title:"Сеть лицейских классов", desc:"Более 10 школ-партнёров." }] }, "2003–2021":{ title:"Признание и рост", items:[{ title:"Аккредитация", desc:"Все программы СПО." }] }, "2022–2026":{ title:"Современные рекорды", items:[{ title:"Чемпионатное движение", desc:"9 медалей в 2024." }] } }
+            };
+            let activeCategory = "college", currentValue = 20;
+            const slider = document.getElementById("eraSlider1");
+            const heroDynamic = document.getElementById("heroDynamic1");
+            const heroEraText = document.getElementById("heroEraText1");
+            const eraLabel = document.getElementById("eraLabel1");
+            const eraChip = document.getElementById("eraChip1");
+            function updateHeroAndSlider(val) { let e = getEraByValue(val); eraLabel.innerText = e.name; eraChip.innerHTML = e.chip; heroEraText.innerHTML = e.heroText; heroDynamic.style.backgroundImage = `url('${e.bg}')`; heroDynamic.style.backgroundSize = "cover"; }
+            function render() { let e = getEraByValue(currentValue); let data = contentDB[activeCategory]?.[e.name] || { title:"История", items:[{ title:"Факты", desc:"Уникальные страницы истории." }] }; document.getElementById("headerTitle1").innerText = data.title; let icons = { college:"fa-landmark", teachers:"fa-chalkboard-user", leadership:"fa-user-tie", graduates:"fa-graduation-cap", achievements:"fa-trophy" }; document.getElementById("headerIcon1").className = `fas ${icons[activeCategory]}`; let container = document.getElementById("dynamicContent1"); container.innerHTML = ""; data.items.forEach((item, idx) => { let card = document.createElement("div"); card.className = "info-card"; card.style.setProperty('--order', idx); card.innerHTML = `<h3><i class="fas fa-chevron-circle-right" style="color:var(--ranepa-burgundy); margin-right:8px;"></i> ${item.title}</h3><p>${item.desc}</p>`; container.appendChild(card); }); }
+            slider.addEventListener("input", (e) => { currentValue = parseInt(e.target.value); updateHeroAndSlider(currentValue); render(); });
+            document.querySelectorAll("#categoryNav1 .cat-btn").forEach(btn => { btn.addEventListener("click", () => { document.querySelectorAll("#categoryNav1 .cat-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); activeCategory = btn.getAttribute("data-cat"); render(); }); });
+            updateHeroAndSlider(20); render();
+            // modal images
+            let modal1 = document.getElementById("imageModal1"), modalImg1 = document.getElementById("modalImgSrc1");
+            document.getElementById("closeModal1").onclick = () => modal1.classList.remove("active");
+            modal1.onclick = (e) => { if(e.target===modal1) modal1.classList.remove("active"); };
+            window.scrollTopBtn1 = document.getElementById("scrollTop1");
+            window.addEventListener("scroll", () => { if(window.scrollTopBtn1) window.scrollTopBtn1.style.opacity = window.scrollY > 400 ? "1" : "0"; });
+            document.getElementById("scrollTop1").onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+        })();
+
+        // ============================================================
+        // 2) ВЕРСИЯ 2 (дизайн «история колледжа» с собственным контентом)
+        // ============================================================
+        (function() {
+            const HERO_BG = { era1: "https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&w=1600", era2: "https://images.pexels.com/photos/256514/pexels-photo-256514.jpeg?auto=compress&cs=tinysrgb&w=1600", era3: "https://images.pexels.com/photos/207896/pexels-photo-207896.jpeg?auto=compress&cs=tinysrgb&w=1600" };
+            const eras2 = [
+                { min: 0, max: 33, name: "1992–2003", label: "Зарождение", heroText: "1992–2003: Подготовительные курсы, лицейские классы, Центр довузовской подготовки", bg: HERO_BG.era1, chip: "ИСТОКИ" },
+                { min: 34, max: 66, name: "2003–2022", label: "Факультет СПО", heroText: "2003–2022: Факультет среднего профессионального образования и довузовской подготовки", bg: HERO_BG.era2, chip: "РАСЦВЕТ" },
+                { min: 67, max: 100, name: "2022–2026", label: "Колледж РАНХиГС", heroText: "2022–2026: Преобразование в колледж, цифровизация, лидерство в регионе", bg: HERO_BG.era3, chip: "НАШИ ДНИ" }
+            ];
+            function getEraByValue2(val) { if (val <= 33) return eras2[0]; if (val <= 66) return eras2[1]; return eras2[2]; }
+            const contentDB2 = {
+                college: { "1992–2003": { title: "Зарождение системы непрерывного образования", items: [{ id:"college1", title:"1992 — Подготовительные курсы", desc:"Организованы первые подготовительные курсы.", extra:"Инициаторы: Гусева М.А." },{ id:"college2", title:"1993 — Лицейские классы", desc:"Открыт первый лицейский класс в школе №47." }] }, "2003–2022": { title: "Факультет среднего профессионального образования", items: [{ id:"college3", title:"2003 — Создание факультета СПО", desc:"Декан — Вера Рачиковна Дряхлова." }] }, "2022–2026": { title: "Колледж НИУ РАНХиГС", items: [{ id:"college4", title:"2022 — Преобразование в колледж", desc:"Директор — Иванов Сергей Викторович." }] } },
+                teachers: { "1992–2003": { title: "Педагоги-первопроходцы", items: [{ id:"teach1", title:"Гусева Марина Анатольевна", desc:"Инициатор создания лицейских классов." }] }, "2003–2022": { title: "Золотой фонд наставников", items: [{ id:"teach2", title:"Вера Рачиковна Дряхлова", desc:"Кандидат социологических наук." }] }, "2022–2026": { title: "Современный педагогический коллектив", items: [{ id:"teach3", title:"Преподаватели-практики", desc:"85% имеют высшую категорию." }] } },
+                leadership: { "1992–2003": { title: "Руководители-основатели", items: [{ id:"lead1", title:"Владимир Андреевич Мальцев", desc:"Директор Волго-Вятского кадрового центра." }] }, "2003–2022": { title: "Руководство факультета", items: [{ id:"lead2", title:"Вера Рачиковна Дряхлова", desc:"Многолетний декан." }] }, "2022–2026": { title: "Современное руководство", items: [{ id:"lead3", title:"Иванов Сергей Викторович", desc:"Директор колледжа с 2022." }] } },
+                graduates: { "1992–2003": { title: "Первые выпускники", items: [{ id:"grad1", title:"Выпускники подготовительных курсов", desc:"Стали успешными управленцами." }] }, "2003–2022": { title: "Выпускники факультета СПО", items: [{ id:"grad2", title:"Карьерные траектории", desc:"Работают в органах власти." }] }, "2022–2026": { title: "Современные выпускники", items: [{ id:"grad3", title:"Лидеры нового поколения", desc:"94% трудоустройства." }] } },
+                achievements: { "1992–2003": { title: "Первые достижения", items: [{ id:"ach1", title:"Создание модели профильных классов", desc:"Уникальная система 'школа — вуз'." }] }, "2003–2022": { title: "Признание и рост", items: [{ id:"ach2", title:"Лучший факультет довузовской подготовки", desc:"Высокий процент поступления." }] }, "2022–2026": { title: "Современные рекорды", items: [{ id:"ach3", title:"ТОП-3 СПО Приволжья", desc:"9 медалей на чемпионате 'Профессионалы'." }] } }
+            };
+            const CUSTOM_IMAGES = { college1:"https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg", 
+            college2:"https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg", 
+            college4:"https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg", 
+            teach1:"https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg", 
+            teach2:"https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg",
+             teach3:"https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg",
+              lead1:"https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg", 
+              lead2:"https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg", 
+              lead3:"https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg",
+               grad1:"https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg",
+                grad2:"https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg", 
+                grad3:"https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg", 
+                ach1:"https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg", 
+                ach2:"https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg",
+                 ach3:"https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg" };
+            let activeCategory2 = "college", currentValue2 = 0;
+            const verticalRange = document.getElementById("eraSliderVertical2");
+            const heroDynamic2 = document.getElementById("heroDynamic2");
+            const heroEraText2 = document.getElementById("heroEraText2");
+            function updateHeroUI2(val) { let e = getEraByValue2(val); heroEraText2.innerHTML = e.heroText; heroDynamic2.style.backgroundImage = `url('${e.bg}')`; heroDynamic2.style.backgroundSize = "cover"; }
+            function renderContent2() { let eraObj = getEraByValue2(currentValue2); let data = contentDB2[activeCategory2]?.[eraObj.name] || { title:"История", items:[{ id:"def", title:"Факты", desc:"Уникальные страницы истории колледжа." }] }; document.getElementById("panelTitle2").innerText = data.title; let icons = { college:"fa-graduation-cap", teachers:"fa-chalkboard-user", leadership:"fa-user-tie", graduates:"fa-star-of-life", achievements:"fa-trophy" }; document.getElementById("panelIcon2").className = `fas ${icons[activeCategory2]}`; let container = document.getElementById("dynamicContent2"); container.innerHTML = ""; data.items.forEach(item => { let imgUrl = CUSTOM_IMAGES[item.id] || "https://static.vecteezy.com/system/resources/thumbnails/048/910/778/small_2x/default-image-missing-placeholder-free-vector.jpg"; let card = document.createElement("div"); card.className = "history-card"; card.setAttribute("data-title", item.title); card.setAttribute("data-desc", item.desc); card.setAttribute("data-extra", item.extra || "Из истории колледжа"); card.innerHTML = `<h3><i class="fas fa-chevron-circle-right" style="color:#c27e2e;"></i> ${item.title}</h3><p>${item.desc}</p><div class="card-image-wrapper"><img src="${imgUrl}" alt="${item.title}" loading="lazy"></div>`; container.appendChild(card); }); attachCardEvents2(); }
+            function attachCardEvents2() { document.querySelectorAll("#dynamicContent2 .history-card").forEach(card => { card.querySelector(".card-image-wrapper img")?.addEventListener("click", (e) => { e.stopPropagation(); openImageModal2(e.target.src); }); card.addEventListener("click", () => showDetailModal2(card.getAttribute("data-title")||'', card.getAttribute("data-desc")||'', card.getAttribute("data-extra")||'')); }); }
+            function showDetailModal2(title, desc, extra) { document.getElementById("detailTitle2").innerText = title; document.getElementById("detailDesc2").innerHTML = desc; document.getElementById("detailExtra2").innerHTML = `<i class="fas fa-archive"></i> ${extra}`; document.getElementById("detailModal2").classList.add("active"); }
+            function openImageModal2(src) { document.getElementById("modalImage2").src = src; document.getElementById("imageModal2").classList.add("active"); }
+            function handleSliderChange(val) { let snapped = val; if(snapped <=33) snapped=0; else if(snapped<=66) snapped=50; else snapped=100; if(Math.abs(currentValue2-snapped)<1) return; currentValue2 = snapped; updateHeroUI2(currentValue2); renderContent2(); if(Math.abs(verticalRange.value - snapped)>0.5) verticalRange.value = snapped; }
+            verticalRange.addEventListener("change", (e) => { handleSliderChange(parseInt(e.target.value)); });
+            document.querySelectorAll("#categoryTabs2 .tab-btn").forEach(btn => { btn.addEventListener("click", () => { document.querySelectorAll("#categoryTabs2 .tab-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); activeCategory2 = btn.getAttribute("data-cat"); renderContent2(); }); });
+            document.querySelectorAll(".marker-vertical").forEach(m => { m.addEventListener("click", (e) => { let target = parseInt(m.getAttribute("data-era-val")); verticalRange.value = target; handleSliderChange(target); }); });
+            document.querySelector(".close-detail")?.addEventListener("click", () => document.getElementById("detailModal2").classList.remove("active")); document.querySelector(".closeImageModal2")?.addEventListener("click", () => document.getElementById("imageModal2").classList.remove("active")); document.getElementById("imageModal2")?.addEventListener("click", (e) => { if(e.target===document.getElementById("imageModal2")) document.getElementById("imageModal2").classList.remove("active"); }); document.getElementById("detailModal2")?.addEventListener("click", (e) => { if(e.target===document.getElementById("detailModal2")) document.getElementById("detailModal2").classList.remove("active"); });
+            updateHeroUI2(0); renderContent2(); let scrollBtn2 = document.getElementById("scrollTop2"); window.addEventListener("scroll", () => { if(scrollBtn2) scrollBtn2.style.opacity = window.scrollY > 400 ? "1" : "0"; }); scrollBtn2.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+        })();
+
+        // ========== ПЕРЕКЛЮЧЕНИЕ МЕЖДУ ДВУМЯ ВЕРСИЯМИ ==========
+        const version1 = document.getElementById("version1Container");
+        const version2 = document.getElementById("version2Container");
+        const toggleBtn = document.getElementById("toggleDesignBtn");
+        let designState = 1; // 1 = версия1, 2 = версия2
+        function setActiveDesign(design) {
+            if(design === 1) { version1.style.display = "block"; version2.style.display = "none"; }
+            else { version1.style.display = "none"; version2.style.display = "block"; }
+            designState = design;
+        }
+        toggleBtn.addEventListener("click", () => { setActiveDesign(designState === 1 ? 2 : 1); });
+        setActiveDesign(1); // старт с версии 1
+    </script>
+</body>
+</html>
